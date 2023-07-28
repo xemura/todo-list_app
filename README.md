@@ -1,23 +1,24 @@
-# Список дел на день
+# todo-list_app
 Firebase, NavigationView, RecyclerView, Fragments, Dialog, Custom, Figma
 
-Как только пользователь запускает приложение, то появляется вводный фрагмент. "Вводный фрагмент": текст, картинка и кнопка.
-Затем, по нажатию на кнопку "Начать", происходит переход на фрагмент регистрации.
-"Регистрация": поля для ввода имени, почты, создания и повторения пароля; есть возможность перейти на фрагмент входа.
+As soon as the user launches the application, an introductory fragment appears. "Introductory fragment": text, picture and button.
+Then, by clicking on the "Start" button, the transition to the registration fragment takes place.
+"Registration": fields for entering a name, email, creating and repeating a password; it is possible to go to the login fragment.
 
 ![image](https://github.com/xemura/todo-list_app/assets/92382028/2aaee1f4-f861-4907-9362-26537e88266b)
 
-"Фрагмент входа": поля для ввода почты, пароля; есть возможность перейти на фрагмент с регистрацией и смены пароля.
-После нажатия на кнопки зарегистрироваться и войти, пользователя перебрасывает на главный фрагмент, где и будут находиться все его дела.
-"Главный экран": карточка с приветствием пользователя и указанием количества задач на день, карточка с прогрессом по выполненым задачам, карточка со всеми задачами.
+"Login fragment": fields for entering mail, password; it is possible to switch to a fragment with registration and password change.
+After clicking on the register and log in buttons, the user is transferred to the main fragment, where all his affairs will be located.
+"Main screen": a card with a greeting of the user and an indication of the number of tasks for the day, a card with progress on completed tasks, a card with all tasks.
 
 ![image](https://github.com/xemura/todo-list_app/assets/92382028/111241ce-2fc7-43fd-92fb-391dfe7c5054)
 
-Если пользователь нажмет на самую первую карточку, то перейдет на фрагмент с профилем, где сможет изменить имя, выйти из аккаунта или вернуться к списку дел.
-Также пользователь сможет изменить пароль, нажав на соответствующий текст на фрагменте входа. 
-На фрагменте смены пароля, пользователь вводит свою почту, затем нажимает на кнопку и ему на почту отправляется ссылка, по которой он должен перейти и ввести новый пароль. 
-Затем пользователь сможет вернуться на фрагмент входа и зайти в профиль с новыми данными.
+If the user clicks on the very first card, he will go to the fragment with the profile, where he can change the name, log out of the account or return to the to-do list.
+The user will also be able to change the password by clicking on the corresponding text on the login fragment.
+On the fragment of the password change, the user enters his email, then clicks on the button and a link is sent to his email, which he must follow and enter a new password.
+Then the user will be able to return to the login fragment and log in to the profile with new data.
 
 ![image](https://github.com/xemura/todo-list_app/assets/92382028/9966d208-33ec-4225-b1a6-677c7183a607)
 
-После закрытия приложения, если пользователь не вышел из аккаунта, он окажется на главном фрагменте с его данными, а если вышел, то на вводном фрагменте.
+After closing the application, if the user has not logged out of the account, he will be on the main fragment with his data, and if he left, then on the introductory fragment.
+
