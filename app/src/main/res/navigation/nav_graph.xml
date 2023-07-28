@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentOnBoard">
+
+    <fragment
+        android:id="@+id/fragmentOnBoard"
+        android:name="com.xenia.todosimpleapp.fragments.FragmentOnBoard"
+        android:label="fragment_on_board"
+        tools:layout="@layout/fragment_on_board" >
+        <action
+            android:id="@+id/action_fragmentOnBoard_to_fragmentSignUp"
+            app:destination="@id/fragmentSignUp" />
+        <action
+            android:id="@+id/action_fragmentOnBoard_to_fragmentMain"
+            app:destination="@id/fragmentMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSignUp"
+        android:name="com.xenia.todosimpleapp.fragments.FragmentSignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_fragmentSignUp_to_fragmentSignIn2"
+            app:destination="@id/fragmentSignIn2" />
+        <action
+            android:id="@+id/action_fragmentSignUp_to_fragmentMain"
+            app:destination="@id/fragmentMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSignIn2"
+        android:name="com.xenia.todosimpleapp.fragments.FragmentSignIn"
+        android:label="Fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_fragmentSignIn2_to_fragmentMain"
+            app:destination="@id/fragmentMain" />
+        <action
+            android:id="@+id/action_fragmentSignIn2_to_fragmentSignUp"
+            app:destination="@id/fragmentSignUp" />
+        <action
+            android:id="@+id/action_fragmentSignIn2_to_fragmentRecoveryPassword"
+            app:destination="@id/fragmentRecoveryPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMain"
+        android:name="com.xenia.todosimpleapp.fragments.FragmentMain"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentProfile"
+            app:destination="@id/fragmentProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.xenia.todosimpleapp.fragments.FragmentProfile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentMain"
+            app:destination="@id/fragmentMain" />
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentSignUp"
+            app:destination="@id/fragmentSignUp" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRecoveryPassword"
+        android:name="com.xenia.todosimpleapp.fragments.FragmentRecoveryPassword"
+        android:label="fragment_recovery_password"
+        tools:layout="@layout/fragment_recovery_password" >
+        <action
+            android:id="@+id/action_fragmentRecoveryPassword_to_fragmentSignIn2"
+            app:destination="@id/fragmentSignIn2" />
+    </fragment>
+</navigation>

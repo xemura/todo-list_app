@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">TODOSimpleApp</string>
+
+    <!-- fragment_main.xml -->
+    <string name="hello">Hello, %1$s!</string>
+    <string name="count_tasks">You have 0 task today</string>
+    <string name="progress">Your progress will be right here</string>
+    <string name="progress_digit" translatable="false">0%</string>
+    <string name="today_tasks">Today`s tasks</string>
+
+    <!-- fragment_on_board.xml -->
+    <string name="tv_on_board_1">Get things done with TODo</string>
+    <string name="tv_on_board_2">Complete tasks for a better life.  To delete a task, swipe left or right.</string>
+    <string name="btn_text_on_board">Get Started</string>
+    <string name="src_image" translatable="false">image_on_board</string>
+
+    <!-- fragment_sign_in.xml -->
+    <string name="welcome_back">Welcome back!</string>
+    <string name="enter_email_address">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="forgot_password"><u>Forgot your password?</u></string>
+    <string name="sign_in">Sign In</string>
+    <string name="do_not_have_an_account">Don`t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!-- fragment_sign_up.xml -->
+    <string name="welcome_onboard">Welcome Onboard!</string>
+    <string name="help_you">Let`s help you meet up your task</string>
+    <string name="enter_full_name">Enter your Name</string>
+    <string name="email_address">Enter your Email address</string>
+    <string name="create_password">Create a Password</string>
+    <string name="confirm_password">Confirm your Password</string>
+    <string name="have_account">Already have an account? </string>
+
+    <string name="task">Task</string>
+
+    <!-- fragment_recovery_password.xml -->
+    <string name="text_recovery_1">Enter the email and click on the button to send the link</string>
+    <string name="send_code">Send link</string>
+    <string name="link_sent">Link sent</string>
+    <string name="return_to_the_sign_in"><u>Return to the sign in</u></string>
+
+    <!-- fragment_profile.xml -->
+    <string name="text_profile_name">name</string>
+    <string name="text_profile_sign_out">Sign out</string>
+    <string name="text_profile_return">Return to the tasks</string>
+    <string name="text_profile_create">created by xemura</string>
+</resources>

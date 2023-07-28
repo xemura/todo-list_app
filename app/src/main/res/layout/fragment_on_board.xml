@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentOnBoard"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/image_on_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/image_on_board"
+        android:layout_marginTop="118dp"
+        android:contentDescription="@string/src_image" />
+
+    <TextView
+        android:id="@+id/tv_on_board_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:text="@string/tv_on_board_1"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_on_board_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:gravity="center"
+        android:text="@string/tv_on_board_2"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_on_board"
+        android:layout_width="208dp"
+        android:layout_height="65dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="@string/btn_text_on_board"
+        android:layout_marginTop="150dp"
+        android:textSize="18sp"/>
+</LinearLayout>

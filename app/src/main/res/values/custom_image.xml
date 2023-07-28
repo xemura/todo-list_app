@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="circular">
+        <item name="cornerSize">30dp</item>
+    </style>
+    <style name="edit">
+        <item name="fontFamily">@font/baloo_bhai_2</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

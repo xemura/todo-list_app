@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "880459787124",
+    "project_id": "todosimpleapp-a5de8",
+    "storage_bucket": "todosimpleapp-a5de8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880459787124:android:93926fb361f9989cfa9a21",
+        "android_client_info": {
+          "package_name": "com.xenia.todosimpleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880459787124-k38fbiju2ppnsbfp4bnjbpg7bvi674ph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBvqk4d_glvwPB_-xGRR8oaS_FNkanNlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880459787124-k38fbiju2ppnsbfp4bnjbpg7bvi674ph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

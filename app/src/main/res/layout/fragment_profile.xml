@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentProfile"
+    android:background="@drawable/profile_background">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/black_border"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextProfile"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/baloo"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/text_profile_name" />
+
+            <Button
+                android:id="@+id/profile_sign_out"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo_bhai_2"
+                android:text="@string/text_profile_sign_out" />
+
+            <Button
+                android:id="@+id/return_to_main"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo_bhai_2"
+                android:text="@string/text_profile_return" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_profile_create"
+                android:fontFamily="@font/baloo_bhai_2"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
