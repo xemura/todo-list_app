@@ -11,14 +11,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.xenia.todosimpleapp.databinding.FragmentSignInBinding
 
 class FragmentSignIn : Fragment() {
-    private lateinit var binding: FragmentSignInBinding
+    private var _binding: FragmentSignInBinding? = null
+    private val binding get() = _binding!!
+
     private var firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -51,5 +53,10 @@ class FragmentSignIn : Fragment() {
             val action = FragmentSignInDirections.actionFragmentSignIn2ToFragmentRecoveryPassword()
             view.findNavController().navigate(action)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

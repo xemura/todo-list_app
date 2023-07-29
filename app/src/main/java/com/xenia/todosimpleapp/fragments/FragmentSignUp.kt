@@ -1,7 +1,6 @@
 package com.xenia.todosimpleapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +11,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.UserData
 import com.xenia.todosimpleapp.databinding.FragmentSignUpBinding
 
 class FragmentSignUp : Fragment() {
-    private lateinit var binding : FragmentSignUpBinding
+    private var _binding : FragmentSignUpBinding? = null
+    private val binding get() = _binding!!
+
     private var firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var database: DatabaseReference
 
@@ -25,8 +25,9 @@ class FragmentSignUp : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
+        _binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -72,5 +73,10 @@ class FragmentSignUp : Fragment() {
                 Toast.makeText(activity, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

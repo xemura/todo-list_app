@@ -15,7 +15,9 @@ import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.databinding.FragmentProfileBinding
 
 class FragmentProfile : Fragment() {
-    private lateinit var binding: FragmentProfileBinding
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
@@ -23,7 +25,7 @@ class FragmentProfile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
         auth = Firebase.auth
         return binding.root
@@ -54,7 +56,11 @@ class FragmentProfile : Fragment() {
             val action = FragmentProfileDirections.actionFragmentProfileToFragmentMain()
             view.findNavController().navigate(action)
         }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

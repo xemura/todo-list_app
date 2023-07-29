@@ -15,7 +15,9 @@ import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.databinding.FragmentRecoveryPasswordBinding
 
 class FragmentRecoveryPassword : Fragment() {
-    private lateinit var binding: FragmentRecoveryPasswordBinding
+    private var _binding: FragmentRecoveryPasswordBinding? = null
+    private val binding get() = _binding!!
+
     private var firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var database: DatabaseReference
 
@@ -27,8 +29,9 @@ class FragmentRecoveryPassword : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRecoveryPasswordBinding.inflate(layoutInflater, container, false)
         database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
+        _binding = FragmentRecoveryPasswordBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -55,5 +58,10 @@ class FragmentRecoveryPassword : Fragment() {
             val action = FragmentRecoveryPasswordDirections.actionFragmentRecoveryPasswordToFragmentSignIn2()
             view.findNavController().navigate(action)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

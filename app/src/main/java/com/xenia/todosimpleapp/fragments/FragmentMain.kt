@@ -26,7 +26,9 @@ import com.xenia.todosimpleapp.databinding.FragmentMainBinding
 
 
 class FragmentMain : Fragment(), FragmentCommunication {
-    private lateinit var binding: FragmentMainBinding
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
+
     lateinit var rvAdapter: RecyclerViewAdapter
     private var firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var database: DatabaseReference
@@ -39,7 +41,7 @@ class FragmentMain : Fragment(), FragmentCommunication {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
         recyclerView = binding.rcViewMain
 
@@ -197,5 +199,10 @@ class FragmentMain : Fragment(), FragmentCommunication {
         val textCountTasks : String = if (countTasks == 1 || countTasks == 0) "You have $countTasks task today"
         else "You have $countTasks tasks today"
         binding.welcomeText2.text = textCountTasks
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
