@@ -1,5 +1,5 @@
 # todo-list_app
-Firebase, NavigationView, RecyclerView, Fragments, Dialog, Custom, Figma
+Firebase, NavigationView, RecyclerView, ViewBinding, Fragments, Dialog, Custom, Figma
 
 As soon as the user launches the application, an introductory fragment appears. "Introductory fragment": text, picture and button.
 Then, by clicking on the "Start" button, the transition to the registration fragment takes place.
