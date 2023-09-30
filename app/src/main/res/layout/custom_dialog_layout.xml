@@ -66,6 +66,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_dialog"
                         style="@style/edit"
+                        android:maxLines="1"
+                        android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit"
