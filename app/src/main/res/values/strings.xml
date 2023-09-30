@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TODOSimpleApp</string>
+    <string name="app_name">TO-DO</string>
 
     <!-- fragment_main.xml -->
     <string name="hello">Hello, %1$s!</string>
