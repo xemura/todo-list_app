@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.xenia.todosimpleapp.ObjectFirebase
 import com.xenia.todosimpleapp.UserData
 import com.xenia.todosimpleapp.databinding.FragmentSignUpBinding
 
@@ -25,8 +26,7 @@ class FragmentSignUp : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
-
+        database = ObjectFirebase.firebaseDatabase
         _binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -51,11 +51,9 @@ class FragmentSignUp : Fragment() {
                         if (it.isSuccessful) {
                             // save in firebase realtime database
                             val user = UserData(name, email, tasksList)
-                            val uid = firebaseAuth.currentUser?.uid
+                            val uid = ObjectFirebase.userUid!!
 
-                            if (uid != null) {
-                                database.child("users").child(uid).setValue(user)
-                            }
+                            database.child("users").child(uid).setValue(user)
 
                             val action = FragmentSignUpDirections.actionFragmentSignUpToFragmentMain()
                             view.findNavController().navigate(action)
@@ -66,7 +64,7 @@ class FragmentSignUp : Fragment() {
                     }
                 }
                 else {
-                    Toast.makeText(activity, "Passwords does`t confirm", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Passwords does not confirm", Toast.LENGTH_SHORT).show()
                 }
             }
             else {
