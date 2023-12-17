@@ -1,5 +1,5 @@
 # todo-list_app
-Firebase, NavigationView, RecyclerView, ViewBinding, Fragments, Dialog, Custom, Figma
+Firebase, NavigationView (Fragments), RecyclerView, ViewBinding, Fragments, Dialog, MaterialDesign, Figma
 
 <img src="https://github.com/xemura/todo-list_app/blob/master/ToDo.gif" width="250" height="500"/>
 
