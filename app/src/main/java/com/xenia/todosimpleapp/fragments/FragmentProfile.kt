@@ -12,7 +12,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.xenia.todosimpleapp.ObjectFirebase
 import com.xenia.todosimpleapp.databinding.FragmentProfileBinding
 
 class FragmentProfile : Fragment() {
@@ -27,20 +26,22 @@ class FragmentProfile : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
-        database = ObjectFirebase.firebaseDatabase
-        auth = ObjectFirebase.auth
+        database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
+        auth = Firebase.auth
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userUid = ObjectFirebase.userUid!!
-        database.child("users").child(userUid).get().addOnSuccessListener {
-            val userName = it.child("username").value as String
-            binding.editTextProfile.setText(userName)
-            Log.i("firebase", "Got value ${it.value}")
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
+        val userUid = auth.currentUser?.uid
+        if (userUid != null) {
+            database.child("users").child(userUid).get().addOnSuccessListener {
+                val userName = it.child("username").value as String
+                binding.editTextProfile.setText(userName)
+                Log.i("firebase", "Got value ${it.value}")
+            }.addOnFailureListener{
+                Log.e("firebase", "Error getting data", it)
+            }
         }
         binding.profileSignOut.setOnClickListener {
             auth.signOut()
@@ -49,7 +50,9 @@ class FragmentProfile : Fragment() {
         }
         binding.returnToMain.setOnClickListener {
             val changedText = binding.editTextProfile.text.toString()
-            database.child("users").child(userUid).child("username").setValue(changedText)
+            if (userUid != null) {
+                database.child("users").child(userUid).child("username").setValue(changedText)
+            }
             val action = FragmentProfileDirections.actionFragmentProfileToFragmentMain()
             view.findNavController().navigate(action)
         }
