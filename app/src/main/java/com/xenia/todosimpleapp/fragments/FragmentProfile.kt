@@ -12,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.xenia.todosimpleapp.firebase.ObjectFirebase
 import com.xenia.todosimpleapp.databinding.FragmentProfileBinding
 
 class FragmentProfile : Fragment() {
@@ -34,6 +35,7 @@ class FragmentProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userUid = auth.currentUser?.uid
+        Log.d("Tag", "Profile ${ObjectFirebase.userUid} | $userUid")
         if (userUid != null) {
             database.child("users").child(userUid).get().addOnSuccessListener {
                 val userName = it.child("username").value as String

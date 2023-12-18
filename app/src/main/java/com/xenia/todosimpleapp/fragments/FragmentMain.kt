@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.FragmentCommunication
+import com.xenia.todosimpleapp.firebase.ObjectFirebase
 import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.adapter.RecyclerViewAdapter
 import com.xenia.todosimpleapp.databinding.FragmentMainBinding
@@ -89,6 +90,8 @@ class FragmentMain : Fragment(), FragmentCommunication {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("Tag", "Main ${ObjectFirebase.userUid} | $userUid")
 
         if (userUid != null) {
             database.child("users").child(userUid).get().addOnSuccessListener {
