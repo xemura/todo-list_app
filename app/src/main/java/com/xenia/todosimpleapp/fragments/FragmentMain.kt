@@ -31,12 +31,11 @@ class FragmentMain : Fragment(), FragmentCommunication {
     private val binding get() = _binding!!
 
     lateinit var rvAdapter: RecyclerViewAdapter
-    private var firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var database: DatabaseReference
     private lateinit var recyclerView: RecyclerView
     private lateinit var dialog : Dialog
     private var tasksList : ArrayList<String> = arrayListOf()
-    val userUid = firebaseAuth.currentUser?.uid
+    val userUid = ObjectFirebase.userUid
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

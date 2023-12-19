@@ -13,20 +13,18 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.data.UserData
 import com.xenia.todosimpleapp.databinding.FragmentSignUpBinding
+import com.xenia.todosimpleapp.firebase.ObjectFirebase
 
 class FragmentSignUp : Fragment() {
     private var _binding : FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
     private var firebaseAuth = FirebaseAuth.getInstance()
-    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
-
         _binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -51,10 +49,10 @@ class FragmentSignUp : Fragment() {
                         if (it.isSuccessful) {
                             // save in firebase realtime database
                             val user = UserData(name, email, tasksList)
-                            val uid = firebaseAuth.currentUser?.uid
+                            val uid = ObjectFirebase.userUid
 
                             if (uid != null) {
-                                database.child("users").child(uid).setValue(user)
+                                ObjectFirebase.database.child("users").child(uid).setValue(user)
                             }
 
                             val action = FragmentSignUpDirections.actionFragmentSignUpToFragmentMain()

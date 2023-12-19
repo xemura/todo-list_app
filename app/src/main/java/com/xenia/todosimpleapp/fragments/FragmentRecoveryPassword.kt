@@ -19,7 +19,6 @@ class FragmentRecoveryPassword : Fragment() {
     private val binding get() = _binding!!
 
     private var firebaseAuth = FirebaseAuth.getInstance()
-    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +28,6 @@ class FragmentRecoveryPassword : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
-
         _binding = FragmentRecoveryPasswordBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -54,6 +51,7 @@ class FragmentRecoveryPassword : Fragment() {
                 Toast.makeText(activity, "Empty field is not allowed", Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.tvRp.setOnClickListener {
             val action = FragmentRecoveryPasswordDirections.actionFragmentRecoveryPasswordToFragmentSignIn2()
             view.findNavController().navigate(action)

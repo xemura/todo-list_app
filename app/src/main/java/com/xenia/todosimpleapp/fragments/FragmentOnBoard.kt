@@ -17,21 +17,19 @@ import com.xenia.todosimpleapp.databinding.FragmentOnBoardBinding
 class FragmentOnBoard : Fragment() {
     private var _binding: FragmentOnBoardBinding? = null
     private val binding get() = _binding!!
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOnBoardBinding.inflate(layoutInflater, container, false)
-        auth = Firebase.auth
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentUser = auth.currentUser
+        val currentUser = ObjectFirebase.currentUser
         Log.d("Tag", "Onboard ${ObjectFirebase.userUid} | ${currentUser?.uid}")
         Log.d("Tag", "Onboard currentUser ${ObjectFirebase.currentUser} | $currentUser")
         if (currentUser != null) {

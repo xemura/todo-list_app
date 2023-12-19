@@ -12,7 +12,7 @@ object ObjectFirebase {
         get() = Firebase.auth
     val currentUser : FirebaseUser?
         get() = auth.currentUser
-    val firebaseDatabase : DatabaseReference
+    val database : DatabaseReference
         get() = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
     val userUid : String?
         get() = currentUser?.uid
