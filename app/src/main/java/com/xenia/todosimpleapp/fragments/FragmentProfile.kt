@@ -1,17 +1,12 @@
 package com.xenia.todosimpleapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.firebase.ObjectFirebase
 import com.xenia.todosimpleapp.databinding.FragmentProfileBinding
 
@@ -29,27 +24,24 @@ class FragmentProfile : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userUid = ObjectFirebase.userUid
-        Log.d("Tag", "Profile ${ObjectFirebase.userUid} | $userUid")
-        if (userUid != null) {
-            ObjectFirebase.database.child("users").child(userUid).get().addOnSuccessListener {
-                val userName = it.child("username").value as String
-                binding.editTextProfile.setText(userName)
-                Log.i("firebase", "Got value ${it.value}")
-            }.addOnFailureListener{
-                Log.e("firebase", "Error getting data", it)
-            }
+        val userUid = ObjectFirebase.userUid!!
+
+        ObjectFirebase.database.child("users").child(userUid).get().addOnSuccessListener {
+            val userName = it.child("username").value as String
+            binding.editTextProfile.setText(userName)
+        }.addOnFailureListener {
+            Toast.makeText(activity, "Error getting data", Toast.LENGTH_SHORT).show()
         }
+
         binding.profileSignOut.setOnClickListener {
             ObjectFirebase.auth.signOut()
             val action = FragmentProfileDirections.actionFragmentProfileToFragmentSignUp()
             view.findNavController().navigate(action)
         }
+
         binding.returnToMain.setOnClickListener {
-            val changedText = binding.editTextProfile.text.toString()
-            if (userUid != null) {
-                ObjectFirebase.database.child("users").child(userUid).child("username").setValue(changedText)
-            }
+            val setName = binding.editTextProfile.text.toString()
+            ObjectFirebase.database.child("users").child(userUid).child("username").setValue(setName)
             val action = FragmentProfileDirections.actionFragmentProfileToFragmentMain()
             view.findNavController().navigate(action)
         }
@@ -59,5 +51,4 @@ class FragmentProfile : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

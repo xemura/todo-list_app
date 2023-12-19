@@ -13,14 +13,14 @@ import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.FragmentCommunication
 import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.databinding.FragmentMainBinding
+import com.xenia.todosimpleapp.firebase.ObjectFirebase
 
 
 class RecyclerViewAdapter(private val tasks: List<String>, private val mListener: FragmentCommunication) :
-    RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
-    private var database: DatabaseReference = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
+    RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+    private var database: DatabaseReference = ObjectFirebase.database
     private lateinit var binding: FragmentMainBinding
-    private var firebaseAuth = FirebaseAuth.getInstance()
-    private val userUid = firebaseAuth.currentUser?.uid
+    private val userUid = ObjectFirebase.userUid!!
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val checkBox : CheckBox = itemView.findViewById(R.id.checkBox)
@@ -36,36 +36,29 @@ class RecyclerViewAdapter(private val tasks: List<String>, private val mListener
 
     private fun getCountChecked() : Int {
         var progressCount = 0
-        if (userUid != null) {
-            database.child("users").child(userUid)
-                .child("tasksList").get().addOnSuccessListener {
-                    it.children.forEach { item ->
-                        val isChecked = item.value.toString().toBoolean()
-                        if (isChecked) progressCount++
-                    }
-                    mListener.respond(progressCount)
-
-                }.addOnFailureListener{
-                    Log.e("firebase", "Error getting data", it)
+        database.child("users").child(userUid)
+            .child("tasksList").get().addOnSuccessListener {
+                it.children.forEach { item ->
+                    val isChecked = item.value.toString().toBoolean()
+                    if (isChecked) progressCount++
                 }
-        }
+                mListener.respond(progressCount)
+
+            }.addOnFailureListener{
+                Log.e("firebase", "Error getting data", it)
+            }
         return progressCount
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.checkBox.text = tasks[position]
-        database = Firebase.database("https://todosimpleapp-a5de8-default-rtdb.europe-west1.firebasedatabase.app/").reference
-        if (userUid != null) {
-            database.child("users").child(userUid)
-                .child("tasksList").child(holder.checkBox.text.toString()).get().addOnSuccessListener {
-                    holder.checkBox.isChecked = it.value.toString().toBoolean()
-                }
-        }
-        holder.checkBox.setOnClickListener {
-            if (userUid != null) {
-                database.child("users").child(userUid).child("tasksList")
-                    .child(holder.checkBox.text.toString()).setValue(holder.checkBox.isChecked)
+        database.child("users").child(userUid)
+            .child("tasksList").child(holder.checkBox.text.toString()).get().addOnSuccessListener {
+                holder.checkBox.isChecked = it.value.toString().toBoolean()
             }
+        holder.checkBox.setOnClickListener {
+            database.child("users").child(userUid).child("tasksList")
+                .child(holder.checkBox.text.toString()).setValue(holder.checkBox.isChecked)
             getCountChecked()
         }
     }

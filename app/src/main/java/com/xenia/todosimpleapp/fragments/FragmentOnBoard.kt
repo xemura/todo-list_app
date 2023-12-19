@@ -7,9 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.firebase.ObjectFirebase
 import com.xenia.todosimpleapp.databinding.FragmentOnBoardBinding
 
@@ -30,8 +27,6 @@ class FragmentOnBoard : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val currentUser = ObjectFirebase.currentUser
-        Log.d("Tag", "Onboard ${ObjectFirebase.userUid} | ${currentUser?.uid}")
-        Log.d("Tag", "Onboard currentUser ${ObjectFirebase.currentUser} | $currentUser")
         if (currentUser != null) {
             val action = FragmentOnBoardDirections.actionFragmentOnBoardToFragmentMain()
             view.findNavController().navigate(action)

@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.data.UserData
 import com.xenia.todosimpleapp.databinding.FragmentSignUpBinding
 import com.xenia.todosimpleapp.firebase.ObjectFirebase
@@ -18,7 +15,6 @@ import com.xenia.todosimpleapp.firebase.ObjectFirebase
 class FragmentSignUp : Fragment() {
     private var _binding : FragmentSignUpBinding? = null
     private val binding get() = _binding!!
-
     private var firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
@@ -47,24 +43,21 @@ class FragmentSignUp : Fragment() {
                 if (createdPassword == confirmedPassword) {
                     firebaseAuth.createUserWithEmailAndPassword(email, createdPassword).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            // save in firebase realtime database
                             val user = UserData(name, email, tasksList)
-                            val uid = ObjectFirebase.userUid
+                            val uid = ObjectFirebase.userUid!!
 
-                            if (uid != null) {
-                                ObjectFirebase.database.child("users").child(uid).setValue(user)
-                            }
+                            ObjectFirebase.database.child("users").child(uid).setValue(user)
 
                             val action = FragmentSignUpDirections.actionFragmentSignUpToFragmentMain()
                             view.findNavController().navigate(action)
                         }
                         else {
-                            Toast.makeText(activity, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, "Failed to create an account", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
                 else {
-                    Toast.makeText(activity, "Passwords does`t confirm", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Passwords does not confirm", Toast.LENGTH_SHORT).show()
                 }
             }
             else {

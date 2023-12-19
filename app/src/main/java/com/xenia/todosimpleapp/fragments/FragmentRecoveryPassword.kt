@@ -8,21 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.databinding.FragmentRecoveryPasswordBinding
 
 class FragmentRecoveryPassword : Fragment() {
     private var _binding: FragmentRecoveryPasswordBinding? = null
     private val binding get() = _binding!!
-
     private var firebaseAuth = FirebaseAuth.getInstance()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,12 +29,11 @@ class FragmentRecoveryPassword : Fragment() {
 
         binding.btnSendCode.setOnClickListener {
             if (binding.tietRecoveryPasswordEmail.text.toString().isNotEmpty()) {
-                // change password in auth
-                binding.tvRp.visibility = View.VISIBLE
+                binding.tvBtnReturnToSignIn.visibility = View.VISIBLE
                 binding.btnSendCode.setText(R.string.link_sent)
                 val emailToResetPassword = binding.tietRecoveryPasswordEmail.text.toString()
                 firebaseAuth.sendPasswordResetEmail(emailToResetPassword).addOnSuccessListener {
-                    //Toast.makeText(activity, "ddd", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(activity, "", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Toast.makeText(activity, it.toString(), Toast.LENGTH_SHORT).show()
                 }
@@ -52,7 +43,7 @@ class FragmentRecoveryPassword : Fragment() {
             }
         }
 
-        binding.tvRp.setOnClickListener {
+        binding.tvBtnReturnToSignIn.setOnClickListener {
             val action = FragmentRecoveryPasswordDirections.actionFragmentRecoveryPasswordToFragmentSignIn2()
             view.findNavController().navigate(action)
         }

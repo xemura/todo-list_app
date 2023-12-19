@@ -13,7 +13,6 @@ import com.xenia.todosimpleapp.databinding.FragmentSignInBinding
 class FragmentSignIn : Fragment() {
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
-
     private var firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
@@ -26,10 +25,12 @@ class FragmentSignIn : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.tvSignUp.setOnClickListener {
             val action = FragmentSignInDirections.actionFragmentSignIn2ToFragmentSignUp()
             view.findNavController().navigate(action)
         }
+
         binding.btnSignIn.setOnClickListener {
             val email = binding.tietSignInEmail.text.toString()
             val password = binding.tietSignInPassword.text.toString()
@@ -41,12 +42,12 @@ class FragmentSignIn : Fragment() {
                         view.findNavController().navigate(action)
                     }
                     else {
-                        Toast.makeText(activity, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Incorrect username or password!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             else {
-                Toast.makeText(activity, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Empty fields are not allowed!", Toast.LENGTH_SHORT).show()
             }
         }
         binding.tvForgotPassword.setOnClickListener {
