@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.DatabaseReference
 import com.xenia.todosimpleapp.FragmentCommunication
-import com.xenia.todosimpleapp.firebase.ObjectFirebase
 import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.adapter.RecyclerViewAdapter
 import com.xenia.todosimpleapp.data.UserUseCases
@@ -30,11 +27,9 @@ class FragmentMain : Fragment(), FragmentCommunication {
     private val binding get() = _binding!!
 
     private lateinit var rvAdapter: RecyclerViewAdapter
-    private lateinit var database: DatabaseReference
     private lateinit var recyclerView: RecyclerView
     private lateinit var dialog : Dialog
     private var tasksList : ArrayList<String> = arrayListOf()
-    private val userUid = ObjectFirebase.userUid!!
     private val userUseCases = UserUseCases()
 
     override fun onCreateView(
@@ -42,7 +37,6 @@ class FragmentMain : Fragment(), FragmentCommunication {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
-        database = ObjectFirebase.database
         recyclerView = binding.rcViewMain
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -86,14 +80,12 @@ class FragmentMain : Fragment(), FragmentCommunication {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("Tag", "Main ${ObjectFirebase.userUid} | $userUid")
-
-        database.child("users").child(userUid).get().addOnSuccessListener {
+        userUseCases.getUser().get().addOnSuccessListener {
             val userName = it.child("username").value as String
             val welcomeText = "Hello, $userName!"
             binding.welcomeText1.text = welcomeText
         }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
+            Toast.makeText(activity, "Error getting data", Toast.LENGTH_SHORT).show()
         }
 
         userUseCases.getUserTasksList().get().addOnSuccessListener {
@@ -111,7 +103,7 @@ class FragmentMain : Fragment(), FragmentCommunication {
                 setCountTasksToday(tasksList.size)
                 setProgressBarProgress(progressCount)
             }.addOnFailureListener{
-                Log.e("firebase", "Error getting data", it)
+                Toast.makeText(activity, "Error getting data", Toast.LENGTH_SHORT).show()
             }
 
         binding.cardViewMain.setOnClickListener {
@@ -152,7 +144,7 @@ class FragmentMain : Fragment(), FragmentCommunication {
                     recyclerView.adapter = RecyclerViewAdapter(tasksList, this)
 
                 }.addOnFailureListener{
-                    Log.e("firebase", "Error getting data", it)
+                    Toast.makeText(activity, "Error getting data", Toast.LENGTH_SHORT).show()
                 }
             dialog.cancel()
         }
