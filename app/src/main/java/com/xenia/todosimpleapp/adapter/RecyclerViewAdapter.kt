@@ -6,16 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.xenia.todosimpleapp.FragmentCommunication
 import com.xenia.todosimpleapp.R
 import com.xenia.todosimpleapp.data.UserUseCases
 import com.xenia.todosimpleapp.databinding.FragmentMainBinding
-import com.xenia.todosimpleapp.firebase.ObjectFirebase
-
 
 class RecyclerViewAdapter(private val tasks: List<String>, private val mListener: FragmentCommunication) :
     RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
@@ -59,6 +53,4 @@ class RecyclerViewAdapter(private val tasks: List<String>, private val mListener
             getCountChecked()
         }
     }
-
-
 }
